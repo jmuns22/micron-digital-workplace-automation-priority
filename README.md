@@ -57,6 +57,7 @@ This model is a prioritization framework, not a measured audit. A few things it 
 - **Cost savings assume the published benchmark reduction percentages apply uniformly.** Real rollouts see partial adoption, which the 20% risk-adjustment haircut approximates but does not replace.
 - **The Micron-scale extrapolation ($4.1M/year) is directional**, not a budget figure. It assumes uniform scaling of ticket volume across workflows and headcount, which will not hold exactly in practice.
 - **Password Reset was independently flagged as fragile by the risk-adjusted model.** It's also the workflow most likely to already have partial coverage: Micron's job posting lists Microsoft 365 as a current tool, and every Microsoft 365 tenant includes Microsoft Entra ID free, which bundles native self-service password reset. This project found no public confirmation either way, but the possibility reinforces the recommendation to deprioritize this workflow rather than fund a new tool for it.
+- **The user stories, test cases, and story-point estimates in the delivery plan are illustrative**, written by one person against a process map, not validated by an actual engineering or ServiceNow admin team. Real story points would come from the team doing the build, not from this document.
 
 Flagging these upfront is part of the model, not a disclaimer after the fact: a prioritization framework that hides its own weak points is less useful than one that names them.
 
@@ -69,6 +70,22 @@ Flagging these upfront is part of the model, not a disclaimer after the fact: a 
 ![ROI Model](previews/preview_roi_model.png)
 
 Full interactive workbook with editable assumptions: [`data/Automation_Priority_Matrix.xlsx`](data/Automation_Priority_Matrix.xlsx)
+
+## Delivery Plan
+
+The analysis above answers "should we automate this." These artifacts answer "how would a team actually build and roll it out," for the top-recommended workflow (Equipment/Tool Request Approval):
+
+- **User stories + acceptance criteria** (10 stories, 44 story points), written against the future-state process map
+- **UAT test plan** (13 test cases), including one gap the test-planning process itself surfaced: the original design had no explicit rejection path, closed by adding US-09 before build rather than after launch
+- **Risk & dependency tracker** for the pilot (Equipment/Tool Request + Onboarding, both on ServiceNow)
+- **Change management & adoption plan**: phased rollout, communication plan, and adoption metrics defined before rollout starts
+- **Sprint backlog**: 3 build sprints plus discovery, Onboarding built in parallel since it shares the same platform
+
+![User Stories](previews/preview_user_stories.png)
+
+Full workbook: [`data/Project_Delivery_Plan.xlsx`](data/Project_Delivery_Plan.xlsx)
+
+**A finding worth naming:** Onboarding and Equipment/Tool Request are costed as two separate $30,000 ServiceNow builds in the ROI model above, a conservative baseline. Since they share the same platform, admin team, and sprint (see the backlog), bundling them plausibly costs less. The ROI_Model tab now includes an editable bundled scenario: a 25% synergy discount drops the combined one-time cost from $60,000 to $45,000, adding roughly $15,000 to the combined 3-year net. The 25% is a planning assumption, not a sourced figure, and is called out as such in the workbook.
 
 ## Process Maps
 
@@ -89,6 +106,7 @@ Editable source: [`deck/Micron_Automation_Priority_Deck.pptx`](deck/Micron_Autom
 
 ```
 data/            Automation_Priority_Matrix.xlsx: Assumptions, Scoring Matrix, ROI Model, Sensitivity Analysis, Benchmark Sources
+                  Project_Delivery_Plan.xlsx: User Stories, UAT Test Plan, Risk & Dependency Tracker, Change Management Plan, Sprint Backlog
 process_maps/    Current vs future-state diagrams for both Equipment/Tool Request and Password Reset
 deck/            7-slide executive summary deck (.pptx and .pdf)
 previews/        Static images of key sheets and charts, embedded above for quick viewing
