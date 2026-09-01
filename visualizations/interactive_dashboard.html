@@ -169,6 +169,18 @@
   .citation-label { font-size: 11px; font-weight: 800; color: var(--purple); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 6px; }
   .citation-quote { font-size: 11.5px; color: var(--text); font-style: italic; line-height: 1.45; margin-bottom: 6px; }
   .citation-source { font-size: 10.5px; color: var(--muted); }
+  .slider-box { background: #FAF3FD; border: 1px solid #E9D5F5; border-radius: 10px; padding: 16px 18px; margin-bottom: 18px; }
+  .slider-label-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .slider-label { font-size: 12.5px; font-weight: 700; color: var(--text); }
+  .slider-value { font-size: 15px; font-weight: 800; color: var(--purple); }
+  .slider-box input[type="range"] { width: 100%; accent-color: var(--purple); height: 4px; margin: 4px 0; }
+  .slider-hint { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  .slider-reset { background: none; border: 1px solid #D9D9D9; color: var(--muted); font-size: 10.5px; font-weight: 700; padding: 3px 10px; border-radius: 12px; cursor: pointer; margin-left: 10px; }
+  .slider-reset:hover { border-color: var(--purple); color: var(--purple); }
+  .callout-row { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+  .callout-pill { font-size: 11.5px; font-weight: 700; padding: 6px 12px; border-radius: 14px; background: #F0F0F0; color: var(--text); }
+  .callout-pill.warn { background: #FBECEE; color: #8A1F2B; }
+  .callout-pill.good { background: #E9F5EE; color: #1E5C33; }
   .toolfit-chart-box { position: relative; height: 140px; margin-bottom: 10px; }
   .toolfit-caption { font-size: 11.5px; color: var(--muted); line-height: 1.4; margin-bottom: 10px; }
   .matrix2x2 { display: grid; grid-template-columns: 70px 1fr 1fr; grid-template-rows: auto auto auto; gap: 4px; margin-bottom: 10px; font-size: 11px; }
@@ -247,12 +259,30 @@
   <div id="panel-waterfall" class="panel">
     <h2><img class="panel-icon" src="data:image/png;base64,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">Year 1 ROI Build-Up (All 5 Workflows Combined)</h2>
     <div class="caption">Total annual savings across all five workflows, minus one-time implementation costs, minus ongoing annual license costs, equals combined Year 1 net. Every figure here sums directly from the ROI_Model tab.</div>
+    <div class="slider-box">
+      <div class="slider-label-row">
+        <span class="slider-label">What if the loaded IT labor rate isn't $45/hr?</span>
+        <span><span class="slider-value" id="rateValue">$45/hr</span><button class="slider-reset" onclick="resetRate()">Reset</button></span>
+      </div>
+      <input type="range" id="rateSlider" min="25" max="75" value="45" step="1" oninput="onRateChange(this.value)">
+      <div class="slider-hint">Baseline: $45/hr (synthetic assumption, BLS blended IT support range $35-55/hr). Recomputes every workflow's savings live: hours saved x rate.</div>
+      <div class="callout-row" id="rateCallout"></div>
+    </div>
     <div class="chart-box"><canvas id="chartWaterfall"></canvas></div>
   </div>
 
   <div id="panel-payback" class="panel">
     <h2><img class="panel-icon" src="data:image/png;base64,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">Payback Speed by Workflow</h2>
     <div class="caption">How fast each workflow pays for its own implementation cost. Fastest at top. Color bands: green under 5 months, amber 5-8, red above 8.</div>
+    <div class="slider-box">
+      <div class="slider-label-row">
+        <span class="slider-label">What if savings underdeliver? Risk-adjustment haircut</span>
+        <span><span class="slider-value" id="haircutValue">20%</span><button class="slider-reset" onclick="resetHaircut()">Reset</button></span>
+      </div>
+      <input type="range" id="haircutSlider" min="0" max="45" value="20" step="1" oninput="onHaircutChange(this.value)">
+      <div class="slider-hint">Baseline: 20% (a standard planning buffer for adoption lag and estimation error, not a sourced figure). Watch Password/Access Reset: it's the one that breaks first.</div>
+      <div class="callout-row" id="haircutCallout"></div>
+    </div>
     <div class="chart-box"><canvas id="chartPayback"></canvas></div>
   </div>
 
@@ -271,6 +301,15 @@
   <div id="panel-scale" class="panel">
     <h2><img class="panel-icon" src="data:image/png;base64,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">Directional Estimate: Scaling to Micron's Actual Workforce</h2>
     <div class="caption">The model was built at a 5,000-employee reference scale, the size most public automation benchmarks are reported at. Scaled proportionally to Micron's ~53,000-employee FY2025 headcount (per its 10-K), the combined savings identified would extrapolate to roughly $4.1M/year. This is directional, not a budget figure: see the README's Limitations section.</div>
+    <div class="slider-box">
+      <div class="slider-label-row">
+        <span class="slider-label">What if the workforce covered isn't 53,000?</span>
+        <span><span class="slider-value" id="headcountValue">53,000</span><button class="slider-reset" onclick="resetHeadcount()">Reset</button></span>
+      </div>
+      <input type="range" id="headcountSlider" min="5000" max="90000" value="53000" step="1000" oninput="onHeadcountChange(this.value)">
+      <div class="slider-hint">Baseline: 53,000 (Micron's total FY2025 headcount, per its 10-K). Try a smaller number, e.g. one site or one function, not the whole company, to see how the estimate scales down.</div>
+      <div class="callout-row" id="headcountCallout"></div>
+    </div>
     <div class="chart-box"><canvas id="chartScale"></canvas></div>
   </div>
 
@@ -345,6 +384,21 @@
 </div>
 
 <script>
+// Per-workflow source data, exact values from Automation_Priority_Matrix.xlsx
+// (hoursSaved x loadedRate = annualSavings at baseline $45/hr)
+const WORKFLOWS = [
+  { name: 'Onboarding / Provisioning', hoursSaved: 1747.2, oneTime: 30000, license: 0 },
+  { name: 'Shift-Handoff Documentation', hoursSaved: 2754, oneTime: 15000, license: 60000 },
+  { name: 'Equipment / Tool Request', hoursSaved: 840, oneTime: 30000, license: 0 },
+  { name: 'Password / Access Reset', hoursSaved: 2520, oneTime: 10000, license: 90000 },
+  { name: 'Meeting / Resource Booking', hoursSaved: 800, oneTime: 5000, license: 7200 },
+];
+const BASELINE_RATE = 45;
+const BASELINE_HAIRCUT = 20;
+const BASELINE_HEADCOUNT = 53000;
+const REFERENCE_HEADCOUNT = 5000;
+const REFERENCE_TOTAL_SAVINGS = 389754;
+
 const COLORS = {
   primary: '#0D0D0D', brandBlue: '#7A02A3', brandBlue2: '#4E0169', lightBlue: '#D6A8E8',
   accent: '#E8A33D', risk: '#B23A48', green: '#2E7D46', muted: '#595959'
@@ -364,7 +418,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
   });
 });
 
-// ---- 1. Waterfall (floating bar) ----
+// ---- 1. Waterfall (floating bar), rebuilt live by the rate slider ----
 const wfCanvas = document.getElementById('chartWaterfall');
 const wfCtx = wfCanvas.getContext('2d');
 const wfGradientBlue = wfCtx.createLinearGradient(0, 0, 0, 320);
@@ -373,63 +427,148 @@ wfGradientBlue.addColorStop(1, COLORS.brandBlue);
 const wfGradientAccent = wfCtx.createLinearGradient(0, 0, 0, 320);
 wfGradientAccent.addColorStop(0, '#F5D9A8');
 wfGradientAccent.addColorStop(1, COLORS.accent);
-new Chart(wfCanvas, {
-  type: 'bar',
-  data: {
-    labels: ['Total Annual Savings', 'Less: One-Time Costs', 'Less: Annual License Costs', 'Year 1 Net'],
-    datasets: [{
-      data: [[0, 389754], [299754, 389754], [142554, 299754], [0, 142554]],
-      backgroundColor: [wfGradientBlue, COLORS.risk, COLORS.risk, wfGradientAccent],
-      borderRadius: 4,
-    }]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: {
-      legend: { display: false },
-      tooltip: {
-        callbacks: {
-          label: (ctx) => {
-            const [lo, hi] = ctx.raw;
-            return '$' + (hi - lo).toLocaleString();
+let waterfallChart;
+
+function computeAtRate(rate) {
+  return WORKFLOWS.map(w => ({ ...w, annualSavings: w.hoursSaved * rate }));
+}
+
+function renderWaterfall(rate) {
+  const data = computeAtRate(rate);
+  const totalSavings = data.reduce((s, w) => s + w.annualSavings, 0);
+  const totalOneTime = data.reduce((s, w) => s + w.oneTime, 0);
+  const totalLicense = data.reduce((s, w) => s + w.license, 0);
+  const year1Net = totalSavings - totalOneTime - totalLicense;
+  const chartData = [
+    [0, totalSavings],
+    [totalSavings - totalOneTime, totalSavings],
+    [totalSavings - totalOneTime - totalLicense, totalSavings - totalOneTime],
+    [0, year1Net]
+  ];
+  if (waterfallChart) {
+    waterfallChart.data.datasets[0].data = chartData;
+    waterfallChart.update();
+  } else {
+    waterfallChart = new Chart(wfCanvas, {
+      type: 'bar',
+      data: {
+        labels: ['Total Annual Savings', 'Less: One-Time Costs', 'Less: Annual License Costs', 'Year 1 Net'],
+        datasets: [{
+          data: chartData,
+          backgroundColor: [wfGradientBlue, COLORS.risk, COLORS.risk, wfGradientAccent],
+          borderRadius: 4,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => {
+                const [lo, hi] = ctx.raw;
+                return '$' + Math.round(hi - lo).toLocaleString();
+              }
+            }
           }
+        },
+        scales: {
+          y: { ticks: { callback: (v) => '$' + (v / 1000).toFixed(0) + 'K' } }
         }
       }
-    },
-    scales: {
-      y: { ticks: { callback: (v) => '$' + (v/1000).toFixed(0) + 'K' } }
-    }
+    });
   }
-});
+  return { totalSavings, totalOneTime, totalLicense, year1Net };
+}
 
-// ---- 2. Payback ranking ----
-const paybackData = [
-  { name: 'Meeting / Resource Booking', months: 2.08 },
-  { name: 'Shift-Handoff Documentation', months: 2.82 },
-  { name: 'Onboarding / Provisioning', months: 4.58 },
-  { name: 'Password / Access Reset', months: 5.13 },
-  { name: 'Equipment / Tool Request', months: 9.52 },
-];
-new Chart(document.getElementById('chartPayback'), {
-  type: 'bar',
-  data: {
-    labels: paybackData.map(d => d.name),
-    datasets: [{
-      data: paybackData.map(d => d.months),
-      backgroundColor: paybackData.map(d => d.months < 5 ? COLORS.green : (d.months < 8 ? COLORS.accent : COLORS.risk)),
-      borderRadius: 4,
-    }]
-  },
-  options: {
-    indexAxis: 'y',
-    responsive: true, maintainAspectRatio: false,
-    plugins: {
-      legend: { display: false },
-      tooltip: { callbacks: { label: (ctx) => ctx.raw + ' months' } }
-    },
-    scales: { x: { title: { display: true, text: 'Payback Period (months)' } } }
+function onRateChange(val) {
+  const rate = Number(val);
+  document.getElementById('rateValue').textContent = '$' + rate + '/hr';
+  const r = renderWaterfall(rate);
+  const diff = r.year1Net - 142554;
+  const sign = diff >= 0 ? '+' : '-';
+  document.getElementById('rateCallout').innerHTML =
+    `<span class="callout-pill ${diff >= 0 ? 'good' : 'warn'}">Year 1 Net: $${Math.round(r.year1Net).toLocaleString()} (${sign}$${Math.abs(Math.round(diff)).toLocaleString()} vs baseline)</span>`;
+}
+function resetRate() {
+  document.getElementById('rateSlider').value = 45;
+  onRateChange(45);
+}
+renderWaterfall(BASELINE_RATE);
+
+// ---- 2. Payback ranking, rebuilt live by the risk-haircut slider ----
+let paybackChart;
+const PAYBACK_CAP = 40;
+
+function computePayback(haircutPct) {
+  const factor = 1 - haircutPct / 100;
+  return WORKFLOWS.map(w => {
+    const annualSavings = w.hoursSaved * BASELINE_RATE;
+    const adjSavings = annualSavings * factor;
+    const netAnnual = adjSavings - w.license;
+    const months = netAnnual > 0 ? (w.oneTime / (netAnnual / 12)) : Infinity;
+    return { name: w.name.replace(' / ', ' /\n'), months, real: months };
+  }).sort((a, b) => a.months - b.months);
+}
+
+function renderPayback(haircutPct) {
+  const data = computePayback(haircutPct);
+  const displayMonths = data.map(d => Math.min(d.months, PAYBACK_CAP));
+  const colors = data.map(d => d.real < 5 ? COLORS.green : (d.real < 8 ? COLORS.accent : COLORS.risk));
+  if (paybackChart) {
+    paybackChart.data.labels = data.map(d => d.name);
+    paybackChart.data.datasets[0].data = displayMonths;
+    paybackChart.data.datasets[0].backgroundColor = colors;
+    paybackChart.update();
+  } else {
+    paybackChart = new Chart(document.getElementById('chartPayback'), {
+      type: 'bar',
+      data: {
+        labels: data.map(d => d.name),
+        datasets: [{
+          data: displayMonths,
+          backgroundColor: colors,
+          borderRadius: 4,
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => {
+                const real = data[ctx.dataIndex].real;
+                return real === Infinity || real > 999 ? 'Never pays back at this haircut' : real.toFixed(1) + ' months';
+              }
+            }
+          }
+        },
+        scales: { x: { title: { display: true, text: 'Payback Period (months)' }, max: PAYBACK_CAP } }
+      }
+    });
   }
-});
+  return data;
+}
+
+function onHaircutChange(val) {
+  const pct = Number(val);
+  document.getElementById('haircutValue').textContent = pct + '%';
+  const data = renderPayback(pct);
+  const worst = data[data.length - 1];
+  const failing = data.filter(d => d.real === Infinity || d.real > 24).length;
+  const pill = worst.real === Infinity || worst.real > 999
+    ? `<span class="callout-pill warn">${worst.name.replace('\n',' ')}: never pays back at ${pct}% haircut</span>`
+    : `<span class="callout-pill ${worst.real > 8 ? 'warn' : 'good'}">${worst.name.replace('\n',' ')}: ${worst.real.toFixed(1)} mo</span>`;
+  const countPill = failing > 0 ? `<span class="callout-pill warn">${failing} of 5 workflows exceed 24-month payback</span>` : `<span class="callout-pill good">All 5 workflows still pay back within 24 months</span>`;
+  document.getElementById('haircutCallout').innerHTML = pill + countPill;
+}
+function resetHaircut() {
+  document.getElementById('haircutSlider').value = 20;
+  onHaircutChange(20);
+}
+renderPayback(BASELINE_HAIRCUT);
 
 // ---- 3. Slope / dual-model ranking ----
 const slopeData = [
@@ -533,35 +672,60 @@ new Chart(document.getElementById('chartRisk'), {
   plugins: [riskPlugin]
 });
 
-// ---- 5. Micron scale ----
+// ---- 5. Micron scale, rebuilt live by the headcount slider ----
 const scaleCanvas = document.getElementById('chartScale');
 const scaleCtx = scaleCanvas.getContext('2d');
 const scaleGradient = scaleCtx.createLinearGradient(0, 0, 0, 320);
 scaleGradient.addColorStop(0, '#D9A3F0');
 scaleGradient.addColorStop(1, COLORS.brandBlue);
-new Chart(scaleCanvas, {
-  type: 'bar',
-  data: {
-    labels: ['Reference Model\n(5,000 employees)', 'Scaled to Micron\n(~53,000 employees)'],
-    datasets: [{
-      data: [389754, 4131392],
-      backgroundColor: [COLORS.lightBlue, scaleGradient],
-      borderColor: COLORS.primary,
-      borderWidth: 2,
-      borderRadius: 4,
-    }]
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: {
-      legend: { display: false },
-      tooltip: { callbacks: { label: (ctx) => '$' + ctx.raw.toLocaleString() } }
-    },
-    scales: {
-      y: { ticks: { callback: (v) => v >= 1e6 ? '$' + (v/1e6).toFixed(1) + 'M' : '$' + (v/1000).toFixed(0) + 'K' } }
-    }
+let scaleChart;
+
+function renderScale(headcount) {
+  const scaledValue = REFERENCE_TOTAL_SAVINGS * (headcount / REFERENCE_HEADCOUNT);
+  if (scaleChart) {
+    scaleChart.data.labels = ['Reference Model\n(5,000 employees)', `Scaled Estimate\n(${Number(headcount).toLocaleString()} employees)`];
+    scaleChart.data.datasets[0].data = [REFERENCE_TOTAL_SAVINGS, scaledValue];
+    scaleChart.update();
+  } else {
+    scaleChart = new Chart(scaleCanvas, {
+      type: 'bar',
+      data: {
+        labels: ['Reference Model\n(5,000 employees)', `Scaled Estimate\n(${Number(headcount).toLocaleString()} employees)`],
+        datasets: [{
+          data: [REFERENCE_TOTAL_SAVINGS, scaledValue],
+          backgroundColor: [COLORS.lightBlue, scaleGradient],
+          borderColor: COLORS.primary,
+          borderWidth: 2,
+          borderRadius: 4,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: (ctx) => '$' + Math.round(ctx.raw).toLocaleString() } }
+        },
+        scales: {
+          y: { ticks: { callback: (v) => v >= 1e6 ? '$' + (v / 1e6).toFixed(1) + 'M' : '$' + (v / 1000).toFixed(0) + 'K' } }
+        }
+      }
+    });
   }
-});
+  return scaledValue;
+}
+
+function onHeadcountChange(val) {
+  const hc = Number(val);
+  document.getElementById('headcountValue').textContent = hc.toLocaleString();
+  const scaled = renderScale(hc);
+  document.getElementById('headcountCallout').innerHTML =
+    `<span class="callout-pill good">Scaled estimate: $${Math.round(scaled).toLocaleString()}/year</span>`;
+}
+function resetHeadcount() {
+  document.getElementById('headcountSlider').value = 53000;
+  onHeadcountChange(53000);
+}
+renderScale(BASELINE_HEADCOUNT);
 
 // ---- 7. Jira sprint points (AI & Tool Fit tab) ----
 const jiraCanvas = document.getElementById('chartJiraSprint');
