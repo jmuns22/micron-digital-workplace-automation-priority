@@ -157,7 +157,8 @@ Five charts beyond the tables and bar chart already in the deck, covering ROI st
 
 ![Micron Scale](visualizations/viz_micronscale.png)
 
-**Interactive version:** [`visualizations/interactive_dashboard.html`](visualizations/interactive_dashboard.html) has all 5 as tabbed, hoverable charts (Chart.js, bundled inline, no internet connection needed). GitHub can't execute JavaScript inline, so download the file and open it in any browser to use it; the static images above are the same charts for quick viewing directly on this page.
+**Interactive version:** <a href="https://jmuns22.github.io/micron-digital-workplace-automation-priority/visualizations/interactive_dashboard.html" target="_blank">View Live Interactive Dashboard →</a> 
+*(Features all 5 charts as tabbed, hoverable visualizations built with Chart.js)*
 
 ## Deck
 
