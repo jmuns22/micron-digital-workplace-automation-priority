@@ -1,5 +1,7 @@
 # Digital Workplace Automation Priority Model
 
+[![View Interactive Dashboard](https://img.shields.io/badge/View-Live_Interactive_Dashboard-0052cc?style=for-the-badge&logo=github)](https://jmuns22.github.io/micron-digital-workplace-automation-priority/visualizations/interactive_dashboard.html)
+
 A data-driven framework for prioritizing IT process automation, built around Micron Technology's Digital Workplace organization.
 
 ## The Problem
